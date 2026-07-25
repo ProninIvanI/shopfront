@@ -1,32 +1,73 @@
-# React + TypeScript + Vite
+# Shop Front Project
 
-This template provides a minimal setup to get React working in Vite with HMR and some Oxlint rules.
+Учебный каталог товаров на React и TypeScript. Проект сделан в рамках восстановления JavaScript и освоения TypeScript: работа с типами, состоянием React, передачей props, поиском, фильтрацией, сортировкой и компонентной архитектурой.
 
-Currently, two official plugins are available:
+## Возможности
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+- 12 локальных товаров с изображениями, категориями, ценой, рейтингом и старой ценой при наличии;
+- поиск по названию без учёта регистра;
+- фильтрация по категории;
+- сортировка по названию, цене и рейтингу в обоих направлениях;
+- состояния «Нет товаров» и «Ничего не найдено»;
+- адаптивная сетка карточек;
+- доступные подписи полей, клавиатурный фокус и сообщения о пустой выдаче.
 
-## React Compiler
+## Стек
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+- React;
+- TypeScript;
+- Vite;
+- CSS Modules;
+- Oxlint.
 
-## Expanding the Oxlint configuration
+## Запуск
 
-If you are developing a production application, we recommend enabling type-aware lint rules by installing `oxlint-tsgolint` and editing `.oxlintrc.json`:
+Требуются Node.js и npm.
 
-```json
-{
-  "$schema": "./node_modules/oxlint/configuration_schema.json",
-  "plugins": ["react", "typescript", "oxc"],
-  "options": {
-    "typeAware": true
-  },
-  "rules": {
-    "react/rules-of-hooks": "error",
-    "react/only-export-components": ["warn", { "allowConstantExport": true }]
-  }
-}
+```bash
+npm install
+npm run dev
 ```
 
-See the [Oxlint rules documentation](https://oxc.rs/docs/guide/usage/linter/rules) for the full list of rules and categories.
+После запуска Vite выведет адрес локального сервера в терминал — обычно `http://localhost:5173/`.
+
+## Команды
+
+| Команда | Назначение |
+| --- | --- |
+| `npm run dev` | Запускает сервер разработки Vite |
+| `npm run lint` | Проверяет код линтером |
+| `npm run build` | Проверяет TypeScript и создаёт production-сборку |
+| `npm run preview` | Локально открывает готовую production-сборку |
+
+## Структура проекта
+
+```text
+src/
+  components/  # UI-компоненты каталога
+  data/        # локальные товары и подписи категорий
+  images/      # изображения товаров
+  types/       # доменные TypeScript-типы
+```
+
+Состояние поиска, категории и сортировки находится в `ShopSpace`. Компоненты управления передают новое значение через props. Чистая функция `getVisibleProducts` подготавливает выдачу: сортирует, ищет и фильтрует товары, а `ProductFeed` отображает готовые карточки или пустое состояние.
+
+## Тесты
+
+Для тестирования логики каталога используется **Vitest**. Тесты находятся рядом
+с проверяемой функцией: `src/utils/getVisibleProducts.test.ts`.
+
+Покрыты ключевые сценарии работы каталога:
+
+- поиск по названию без учёта регистра;
+- фильтрация товаров по категории;
+- сортировка по цене;
+- совместная работа поиска, фильтра категории и сортировки.
+
+```bash
+# Режим наблюдения: тесты перезапускаются после сохранения файлов
+npm run test
+
+# Однократный запуск тестов — удобно перед коммитом или отправкой на GitHub
+npm run test:run
+```

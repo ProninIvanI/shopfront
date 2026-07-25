@@ -1,0 +1,8 @@
+.container {
+  min-height: min-content;
+  min-width: min-content;
+  margin: 2px;
+  border: 1px solid black;
+  grid-column: 1 / -1;
+  text-align: center;
+}

@@ -1,0 +1,10 @@
+.container {
+  height: max-content;
+  width: 100%;
+  border-bottom: 1px solid black;
+
+}
+
+.namepage{
+  padding: 6px 0px 6px 40px;
+}
